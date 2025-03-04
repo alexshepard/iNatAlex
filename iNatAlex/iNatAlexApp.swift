@@ -11,7 +11,7 @@ import SwiftUI
 struct iNatAlexApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            INatTabBar()
         }
     }
 }
