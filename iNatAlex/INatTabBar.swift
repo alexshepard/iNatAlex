@@ -18,11 +18,8 @@ struct INatTabBar: View {
                 .tabItem {
                     Label("New Observation", systemImage: "camera")
                 }
-            Text("My Obs")
-                .tabItem {
-                    Label("Me", systemImage: "person")
 
-                }
+            MyObs()
         }
     }
 }
