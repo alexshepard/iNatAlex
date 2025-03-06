@@ -14,27 +14,7 @@ struct MyObs: View {
         NavigationStack {
             List {
                 ForEach(myObs) { observation in
-                    HStack {
-                        if let photoURL = observation.observationPhotos.first?.photo.smallUrl {
-                            AsyncImage(url: photoURL) { image in
-                                image
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 100, height: 100)
-                                    .clipped()
-                            } placeholder: {
-                                ProgressView()
-                                    .frame(width: 100, height: 100)
-                            }
-
-                        } else {
-                            Text("No Photo")
-                                .frame(width: 100, height: 100)
-                        }
-                        VStack {
-                            Text(observation.id.uuidString)
-                        }
-                    }
+                    MyObsListViewCell(observation: observation)
                 }
             }
             .navigationTitle("alexshepard")
