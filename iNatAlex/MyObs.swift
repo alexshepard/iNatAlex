@@ -33,10 +33,26 @@ struct MyObs: View {
                     print(error)
                 }
             }
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    Button {
+                        // show messages
+                    } label: {
+                        Label("Messages", systemImage: "tray.full")
+                    }
+
+                    Button {
+                        // show settings
+                    } label: {
+                        Label("Settings", systemImage: "gear")
+                    }
+                }
+            }
         }
         .tabItem {
             Label("Me", systemImage: "person")
         }
+
     }
 }
 
