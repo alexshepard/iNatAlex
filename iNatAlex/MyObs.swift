@@ -24,6 +24,7 @@ struct MyObs: View {
                     let (data, _) = try await URLSession.shared.data(from: url)
                     let jsonDecoder = JSONDecoder()
                     jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+                    jsonDecoder.dateDecodingStrategy = .iso8601
 
                     let resp = try jsonDecoder.decode(ObsFetchResponse.self, from: data)
 

@@ -10,8 +10,43 @@ import Foundation
 struct INatObservation: Identifiable, Codable {
     var uuid: UUID
     var observationPhotos: [INatObservationPhoto]
-
+    var taxon: INatTaxon?
+    var timeObservedAt: Date?
+    
     var id: UUID { uuid }
+
+    var taxonDisplayName: String {
+        if let taxon = taxon {
+            if let commonName = taxon.preferredCommonName {
+                return commonName
+            } else {
+                return taxon.name
+            }
+        } else {
+            return "Unknown Taxon"
+        }
+    }
+
+    static var dateDisplayTextFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        return formatter
+    }()
+
+    var dateDisplayText: String {
+        if let timeObservedAt = self.timeObservedAt {
+            return INatObservation.dateDisplayTextFormatter.string(from: timeObservedAt)
+        } else {
+            return "Unknown Date"
+        }
+    }
+}
+
+struct INatTaxon: Codable, Identifiable {
+    var id: Int
+    var name: String
+    var preferredCommonName: String?
 }
 
 struct INatObservationPhoto: Identifiable, Codable {

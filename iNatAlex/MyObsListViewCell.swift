@@ -28,8 +28,9 @@ struct MyObsListViewCell: View {
                 Text("No Photo")
                     .frame(width: 100, height: 100)
             }
-            VStack {
-                Text(observation.id.uuidString)
+            VStack(alignment: .leading) {
+                Text(observation.taxonDisplayName)
+                Text(observation.dateDisplayText)
             }
         }
     }
