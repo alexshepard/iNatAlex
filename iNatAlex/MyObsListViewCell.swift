@@ -31,6 +31,7 @@ struct MyObsListViewCell: View {
             VStack(alignment: .leading) {
                 Text(observation.taxonDisplayName)
                 Text(observation.dateDisplayText)
+                Text(observation.locationDisplayName)
             }
         }
     }

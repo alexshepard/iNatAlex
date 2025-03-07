@@ -12,7 +12,8 @@ struct INatObservation: Identifiable, Codable {
     var observationPhotos: [INatObservationPhoto]
     var taxon: INatTaxon?
     var timeObservedAt: Date?
-    
+    var placeGuess: String?
+
     var id: UUID { uuid }
 
     var taxonDisplayName: String {
@@ -39,6 +40,15 @@ struct INatObservation: Identifiable, Codable {
             return INatObservation.dateDisplayTextFormatter.string(from: timeObservedAt)
         } else {
             return "Unknown Date"
+        }
+    }
+
+    var locationDisplayName: String {
+        if let placeGuess = self.placeGuess {
+            return placeGuess
+        } else {
+            // could show lat/lng here
+            return "Unknown Location"
         }
     }
 }
