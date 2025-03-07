@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 struct INatObservation: Identifiable, Codable {
     var uuid: UUID
@@ -13,6 +14,7 @@ struct INatObservation: Identifiable, Codable {
     var taxon: INatTaxon?
     var timeObservedAt: Date?
     var placeGuess: String?
+    var location: String?
 
     var id: UUID { uuid }
 
@@ -46,10 +48,35 @@ struct INatObservation: Identifiable, Codable {
     var locationDisplayName: String {
         if let placeGuess = self.placeGuess {
             return placeGuess
+        } else if CLLocationCoordinate2DIsValid(self.locationCoordinate) {
+            return "\(self.locationCoordinate.latitude),\(self.locationCoordinate.longitude)"
         } else {
-            // could show lat/lng here
             return "Unknown Location"
         }
+    }
+
+    var locationCoordinate: CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(latitude: self.latitude, longitude: self.longitude)
+    }
+
+    var latitude: Double {
+        if let location = self.location {
+            let parts = location.split(separator: ",")
+            if parts.count == 2, let lat = Double(parts[0].trimmingCharacters(in: .whitespaces)) {
+                return lat
+            }
+        }
+        return kCLLocationCoordinate2DInvalid.latitude
+    }
+
+    var longitude: Double {
+        if let location = self.location {
+            let parts = location.split(separator: ",")
+            if parts.count == 2, let lng = Double(parts[1].trimmingCharacters(in: .whitespaces)) {
+                return lng
+            }
+        }
+        return kCLLocationCoordinate2DInvalid.longitude
     }
 }
 
