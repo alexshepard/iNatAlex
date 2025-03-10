@@ -7,14 +7,32 @@
 
 import SwiftUI
 
+enum ViewDisplayMode: Int, CaseIterable, Identifiable {
+    case list
+    case grid
+
+    var id: Int { rawValue }
+
+    var systemImage: String {
+        switch (self) {
+        case .list: return "list.bullet"
+        case .grid: return "square.grid.2x2"
+        }
+    }
+}
+
 struct MyObs: View {
     @State private var myObs = [INatObservation]()
+    @State private var viewDisplayMode: ViewDisplayMode = .list
 
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(myObs) { observation in
-                    MyObsListViewCell(observation: observation)
+            Group {
+                switch viewDisplayMode {
+                case .list:
+                    MyObsListView(myObs: $myObs)
+                case .grid:
+                    MyObsGridView(myObs: $myObs)
                 }
             }
             .navigationTitle("alexshepard")
@@ -47,6 +65,19 @@ struct MyObs: View {
                         Label("Settings", systemImage: "gear")
                     }
                 }
+                ToolbarItemGroup(placement: .navigationBarLeading) {
+                    Picker("View Display Mode", selection: $viewDisplayMode) {
+                        ForEach(ViewDisplayMode.allCases) { mode in
+                            Label {
+                                Text("")
+                            } icon: {
+                                Image(systemName: mode.systemImage)
+                            }
+                            .tag(mode)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                }
             }
         }
         .tabItem {
@@ -54,6 +85,7 @@ struct MyObs: View {
         }
 
     }
+
 }
 
 #Preview {
