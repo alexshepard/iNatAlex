@@ -105,3 +105,14 @@ struct ObsFetchResponse: Codable {
     var results: [INatObservation]
     var totalResults: Int
 }
+
+extension INatObservation {
+    static let sample: INatObservation = {
+        let jsonFile = Bundle.main.url(forResource: "264725630", withExtension: "json")!
+        let data = try! Data(contentsOf: jsonFile)
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        return try! decoder.decode(ObsFetchResponse.self, from: data).results.first!
+    }()
+}
