@@ -80,32 +80,6 @@ struct INatObservation: Identifiable, Codable {
     }
 }
 
-struct INatTaxon: Codable, Identifiable {
-    var id: Int
-    var name: String
-    var preferredCommonName: String?
-}
-
-struct INatObservationPhoto: Identifiable, Codable {
-    var uuid: UUID
-    var photo: INatPhoto
-    var id: UUID { uuid }
-}
-
-struct INatPhoto: Identifiable, Codable {
-    var url: URL
-    var smallUrl: URL {
-        URL(string: url.absoluteString.replacingOccurrences(of: "square", with: "small"))!
-    }
-
-    var id: Int
-}
-
-struct ObsFetchResponse: Codable {
-    var results: [INatObservation]
-    var totalResults: Int
-}
-
 extension INatObservation {
     static let sample: INatObservation = {
         let jsonFile = Bundle.main.url(forResource: "264725630", withExtension: "json")!
