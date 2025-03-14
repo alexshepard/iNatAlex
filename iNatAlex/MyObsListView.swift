@@ -13,12 +13,16 @@ struct MyObsListView: View {
     var body: some View {
         List {
             ForEach(myObs) { observation in
-                MyObsListViewCell(observation: observation)
+                NavigationLink(destination: ObsDetailView(observation: observation)) {
+                    MyObsListViewCell(observation: observation)
+                }
             }
         }
     }
 }
 
 #Preview {
-    MyObsListView(myObs: .constant([]))
+    NavigationStack {
+        MyObsListView(myObs: .constant([INatObservation.sample]))
+    }
 }
