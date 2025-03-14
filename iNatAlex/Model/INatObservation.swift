@@ -21,11 +21,7 @@ struct INatObservation: Identifiable, Codable {
 
     var taxonDisplayText: String {
         if let taxon = taxon {
-            if let commonName = taxon.preferredCommonName {
-                return commonName
-            } else {
-                return taxon.name
-            }
+            return taxon.preferredCommonName ?? taxon.name
         } else {
             return "Unknown Taxon"
         }
