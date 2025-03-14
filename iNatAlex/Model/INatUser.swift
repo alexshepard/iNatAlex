@@ -10,4 +10,5 @@ import Foundation
 struct INatUser: Codable, Identifiable {
     var id: Int
     var login: String
+    var name: String?
 }

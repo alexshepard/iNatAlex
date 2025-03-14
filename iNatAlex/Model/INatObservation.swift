@@ -28,7 +28,7 @@ struct INatObservation: Identifiable, Codable {
     }
 
     var observerDisplayText: String {
-        user.login
+        user.name ?? user.login
     }
 
     static var dateDisplayTextFormatter: DateFormatter = {
