@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum ViewDisplayMode: Int, CaseIterable, Identifiable {
+enum MyObsViewDisplayMode: Int, CaseIterable, Identifiable {
     case list
     case grid
 
@@ -21,9 +21,9 @@ enum ViewDisplayMode: Int, CaseIterable, Identifiable {
     }
 }
 
-struct MyObs: View {
+struct MyObsView: View {
     @State private var myObs = [INatObservation]()
-    @State private var viewDisplayMode: ViewDisplayMode = .list
+    @State private var viewDisplayMode: MyObsViewDisplayMode = .list
 
     var body: some View {
         NavigationStack {
@@ -35,7 +35,7 @@ struct MyObs: View {
                     MyObsGridView(myObs: $myObs)
                 }
             }
-            .navigationTitle("alexshepard")
+            .navigationTitle("My Observations")
             .task {
                 let url = URL(string: "https://api.inaturalist.org/v1/observations?user_login=alexshepard&order=desc&order_by=created_at")!
                 do {
@@ -67,7 +67,7 @@ struct MyObs: View {
                 }
                 ToolbarItemGroup(placement: .navigationBarLeading) {
                     Picker("View Display Mode", selection: $viewDisplayMode) {
-                        ForEach(ViewDisplayMode.allCases) { mode in
+                        ForEach(MyObsViewDisplayMode.allCases) { mode in
                             Label {
                                 Text("")
                             } icon: {
@@ -89,5 +89,5 @@ struct MyObs: View {
 }
 
 #Preview {
-    MyObs()
+    MyObsView()
 }

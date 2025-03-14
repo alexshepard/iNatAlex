@@ -19,7 +19,7 @@ struct INatTabBar: View {
                     Label("New Observation", systemImage: "camera")
                 }
 
-            MyObs()
+            MyObsView()
         }
     }
 }
