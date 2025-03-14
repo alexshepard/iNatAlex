@@ -12,13 +12,14 @@ struct INatObservation: Identifiable, Codable {
     var uuid: UUID
     var observationPhotos: [INatObservationPhoto]
     var taxon: INatTaxon?
+    var user: INatUser
     var timeObservedAt: Date?
     var placeGuess: String?
     var location: String?
 
     var id: UUID { uuid }
 
-    var taxonDisplayName: String {
+    var taxonDisplayText: String {
         if let taxon = taxon {
             if let commonName = taxon.preferredCommonName {
                 return commonName
@@ -28,6 +29,10 @@ struct INatObservation: Identifiable, Codable {
         } else {
             return "Unknown Taxon"
         }
+    }
+
+    var observerDisplayText: String {
+        user.login
     }
 
     static var dateDisplayTextFormatter: DateFormatter = {

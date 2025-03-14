@@ -11,7 +11,8 @@ struct ObsDetailView: View {
     var observation: INatObservation
     var body: some View {
         List {
-            Text(observation.taxonDisplayName)
+            Text(observation.observerDisplayText)
+            Text(observation.taxonDisplayText)
             Text(observation.dateDisplayText)
         }
     }

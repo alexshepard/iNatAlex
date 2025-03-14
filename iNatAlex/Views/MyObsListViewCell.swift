@@ -29,7 +29,7 @@ struct MyObsListViewCell: View {
                     .frame(width: 100, height: 100)
             }
             VStack(alignment: .leading) {
-                Text(observation.taxonDisplayName)
+                Text(observation.taxonDisplayText)
                 Text(observation.dateDisplayText)
                 Text(observation.locationDisplayName)
             }
@@ -38,5 +38,5 @@ struct MyObsListViewCell: View {
 }
 
 #Preview {
-    MyObsListViewCell(observation: INatObservation(uuid: UUID(), observationPhotos: []))
+    MyObsListViewCell(observation: INatObservation.sample)
 }
